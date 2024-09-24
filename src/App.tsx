@@ -5,24 +5,27 @@ import EnergyInput from "./components/EnergyInput";
 import XpsPlot from "./components/XpsPlot";
 
 function App() {
-
-    const [selectedElements, setSelectedElements] = useState<string[]>(['']);
-    const [excitationEnergy, setExcitationEnergy] = useState<number | ''>('');
+    const [selectedElements, setSelectedElements] = useState<string[]>([""]);
+    const [excitationEnergy, setExcitationEnergy] = useState<number | "">(1486);
 
     return (
-        <>
-            <XpsPlot selectedElements={selectedElements} excitationEnergy={excitationEnergy || 1}/>
-            <EnergyInput excitationEnergy={excitationEnergy} setExcitationEnergy={setExcitationEnergy} />
-            <ElementSelect
+        <div style={{ display: "flex" }}>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+                <EnergyInput
+                    excitationEnergy={excitationEnergy}
+                    setExcitationEnergy={setExcitationEnergy}
+                />
+                <ElementSelect
+                    selectedElements={selectedElements}
+                    setSelectedElements={setSelectedElements}
+                />
+            </div>
+            <XpsPlot
                 selectedElements={selectedElements}
-                setSelectedElements={setSelectedElements}
+                excitationEnergy={excitationEnergy || 1}
             />
-
-            <p style={{ marginTop: '20px' }}>
-                Selected Elements: {selectedElements.filter((e) => e !== '').join(', ') || 'None'}
-            </p>
-        </>
-    )
-};
+        </div>
+    );
+}
 
 export default App;

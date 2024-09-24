@@ -2,15 +2,15 @@ import "../App.css";
 import library from "../../library.json";
 import React from "react";
 
-
 type ElementSelectProps = {
     selectedElements: string[];
     setSelectedElements: React.Dispatch<React.SetStateAction<string[]>>;
-}
+};
 
-
-export default function ElementSelect({ selectedElements, setSelectedElements }: ElementSelectProps) {
-    const elementSet = new Set(library.map(e => e.Element));
+export default function ElementSelect(
+    { selectedElements, setSelectedElements }: ElementSelectProps,
+) {
+    const elementSet = new Set(library.map((e) => e.element));
     const chemicalElements = Array.from(elementSet).sort();
 
     // Handler to update selected value for a specific index
@@ -27,14 +27,17 @@ export default function ElementSelect({ selectedElements, setSelectedElements }:
 
     // Handler to remove a specific select input
     const removeSelect = (index: number) => {
-        const newSelectedElements = selectedElements.filter((_, i) => i !== index);
+        const newSelectedElements = selectedElements.filter((_, i) =>
+            i !== index
+        );
         setSelectedElements(newSelectedElements);
     };
 
     // Filter options to exclude already selected elements
     const getAvailableOptions = (currentValue: string) => {
         return chemicalElements.filter(
-            (element) => !selectedElements.includes(element) || element === currentValue
+            (element) =>
+                !selectedElements.includes(element) || element === currentValue,
         );
     };
 
@@ -54,13 +57,16 @@ export default function ElementSelect({ selectedElements, setSelectedElements }:
                     <React.Fragment key={index}>
                         <select
                             value={selectedElement}
-                            onChange={(e) => handleSelectChange(index, e.target.value)}
+                            onChange={(e) =>
+                                handleSelectChange(index, e.target.value)}
                             style={{ width: "100%" }}
                         >
                             <option value="" disabled>
                                 Select an element
                             </option>
-                            {getAvailableOptions(selectedElement).map((element) => (
+                            {getAvailableOptions(selectedElement).map((
+                                element,
+                            ) => (
                                 <option key={element} value={element}>
                                     {element}
                                 </option>
@@ -68,14 +74,8 @@ export default function ElementSelect({ selectedElements, setSelectedElements }:
                         </select>
                         {/* Remove button */}
                         <button
+                            className="x-btn"
                             onClick={() => removeSelect(index)}
-                            style={{
-                                backgroundColor: "red",
-                                color: "white",
-                                border: "none",
-                                padding: "1px 6px",
-                                cursor: "pointer",
-                            }}
                         >
                             ×
                         </button>
@@ -85,20 +85,20 @@ export default function ElementSelect({ selectedElements, setSelectedElements }:
 
             {/* Button to add a new select input, neatly aligned below */}
             <button
+                className="add-btn"
                 onClick={addNewSelect}
-                style={{
-                    backgroundColor: "green",
-                    color: "white",
-                    border: "none",
-                    padding: "10px 20px",
-                    cursor: "pointer",
-                    display: "block",
-                    margin: "0 auto",
-                }}
+                // style={{
+                //     backgroundColor: "green",
+                //     color: "white",
+                //     border: "none",
+                //     padding: "10px 20px",
+                //     cursor: "pointer",
+                //     display: "block",
+                //     margin: "0 auto",
+                // }}
             >
                 + Add Element
             </button>
-
         </div>
     );
-};
+}

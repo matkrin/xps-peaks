@@ -1,13 +1,14 @@
-
 type EnergyInputProps = {
     excitationEnergy: number | "";
-    setExcitationEnergy: React.Dispatch<React.SetStateAction<number | "">>
-}
+    setExcitationEnergy: React.Dispatch<React.SetStateAction<number | "">>;
+};
 
-export default function EnergyInput({ excitationEnergy, setExcitationEnergy }: EnergyInputProps) {
+export default function EnergyInput(
+    { excitationEnergy, setExcitationEnergy }: EnergyInputProps,
+) {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const numValue = e.target.value === '' ? '' : Number(e.target.value);
-        if (numValue === '' || (numValue > 0 && numValue <= 3000)) {
+        const numValue = e.target.value === "" ? "" : Number(e.target.value);
+        if (numValue === "" || (numValue > 0 && numValue <= 3000)) {
             setExcitationEnergy(numValue);
         }
     };
@@ -25,4 +26,4 @@ export default function EnergyInput({ excitationEnergy, setExcitationEnergy }: E
             />
         </div>
     );
-};
+}
