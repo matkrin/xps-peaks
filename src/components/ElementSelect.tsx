@@ -84,19 +84,7 @@ export default function ElementSelect(
             </div>
 
             {/* Button to add a new select input, neatly aligned below */}
-            <button
-                className="add-btn"
-                onClick={addNewSelect}
-                // style={{
-                //     backgroundColor: "green",
-                //     color: "white",
-                //     border: "none",
-                //     padding: "10px 20px",
-                //     cursor: "pointer",
-                //     display: "block",
-                //     margin: "0 auto",
-                // }}
-            >
+            <button className="add-btn" onClick={addNewSelect}>
                 + Add Element
             </button>
         </div>

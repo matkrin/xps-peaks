@@ -23,7 +23,7 @@ const createColorMap = (elements: string[]) => {
 
     const colorMap: { [key: string]: string } = {};
     elements.forEach((element, index) => {
-        colorMap[element] = colors[index % colors.length]; // Cycle through colors
+        colorMap[element] = colors[index % colors.length];
     });
     return colorMap;
 };
@@ -45,7 +45,7 @@ export default function XpsPlot(
                 hovertext: `${it.energy} eV, ${it.element} ${it.type}`,
                 hoverinfo: "text",
                 text: `${it.element} ${it.type} = ${it.energy} eV`,
-                type: "bar", // Bar chart type
+                type: "bar",
                 width: 3,
                 marker: { color: colorMap[it.element], opacity: 0.5 },
             };

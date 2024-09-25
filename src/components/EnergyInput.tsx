@@ -15,7 +15,7 @@ export default function EnergyInput(
 
     return (
         <div style={{ padding: "10px" }}>
-            <label>Excitation Energy</label>
+            <label style={{ paddingRight: "5px" }}>Excitation Energy</label>
             <input
                 type="number"
                 value={excitationEnergy}
