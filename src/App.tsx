@@ -12,7 +12,7 @@ function App() {
     return (
         <>
             <div style={{ display: "flex" }}>
-                <div style={{ display: "flex", flexDirection: "column" }}>
+                <div style={{ display: "flex", flexDirection: "column", marginTop: 45 }}>
                     <EnergyInput
                         xRayEnergy={xRayEnergy}
                         setXRayEnergy={setXRayEnergy}

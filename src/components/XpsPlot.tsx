@@ -35,22 +35,21 @@ export default function XpsPlot(
     const data: Data[] = elementLibrary
         .filter((it) => selectedElements.includes(it.element))
         .map((it) => {
-            const bindingEnergy = it.energyType === "KE"
-                ? xRayEnergy - it.energy
-                : it.energy;
-            const kineticEnergy = it.energyType === "BE"
-                ? xRayEnergy - it.energy
-                : it.energy;
+            const isBindingEnergy = it.energyType == "BE";
+            const bindingEnergy = isBindingEnergy ? it.energy : xRayEnergy - it.energy;
+            const kineticEnergy = isBindingEnergy ? xRayEnergy - it.energy : it.energy;
+            const xaxis = isBindingEnergy ? "x" : "x2";
             return {
-                x: [kineticEnergy],
+                x: [it.energy],
                 y: [1],
                 name: `${it.element} ${it.type}`,
-                hovertext: `${it.element} ${it.type}, Binding Energy = ${bindingEnergy} eV, KineticEnergy = ${kineticEnergy} eV`,
+                hovertext: `${it.element} ${it.type}, E<sub>bind</sub> = ${bindingEnergy} eV, E<sub>kin</sub> = ${kineticEnergy} eV`,
                 hoverinfo: "text",
-                text: `${it.element} ${it.type} Binding Energy = ${bindingEnergy} eV, Kinetic Energy = ${kineticEnergy} eV`,
+                text: `${it.element} ${it.type}, E<sub>bind</sub> = ${bindingEnergy} eV, E<sub>kin</sub> = ${kineticEnergy} eV`,
                 type: "bar",
                 width: 3,
                 marker: { color: colorMap[it.element], opacity: 0.5 },
+                xaxis: xaxis,
             };
         });
 
@@ -59,13 +58,13 @@ export default function XpsPlot(
         margin: {
             l: 30,
             r: 30,
-            t: 30,
+            t: 60,
             b: 70,
         },
         xaxis: {
-            range: [0, xRayEnergy + 100],
+            range: [xRayEnergy, 0],
             title: {
-                text: "E<sub>kin</sub> [eV]",
+                text: "E<sub>bind</sub> [eV]",
                 font: {
                     size: 18,
                 },
@@ -74,9 +73,32 @@ export default function XpsPlot(
             showline: true,
             ticks: "outside",
             mirror: true,
+            // mirror: false,
             linewidth: 2,
             tickwidth: 2,
             griddash: "dot",
+            linecolor: "black",
+            tickcolor: "black",
+            tickfont: {
+                size: 14,
+            },
+        },
+        xaxis2: {
+            overlaying: "x",
+            side: "top",
+            range: [0, xRayEnergy],
+            title: {
+                text: "E<sub>kin</sub> [eV]",
+                font: {
+                    size: 18,
+                },
+                standoff: -12,
+            },
+            showline: true,
+            ticks: "outside",
+            linewidth: 2,
+            tickwidth: 2,
+            // griddash: "dot",
             linecolor: "black",
             tickcolor: "black",
             tickfont: {
@@ -94,6 +116,7 @@ export default function XpsPlot(
             griddash: "dot",
             linecolor: "black",
             zeroline: false,
+            fixedrange: true, // Disables zooming in the y-axis
         },
     };
 
