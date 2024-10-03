@@ -2,7 +2,7 @@ import elementLibrary from "../../library.json";
 
 type PeaksTableProps = {
     selectedElements: string[];
-    excitationEnergy: number | "";
+    xRayEnergy: number | "";
 };
 
 function startsWithLetter(str: string): boolean {
@@ -10,9 +10,9 @@ function startsWithLetter(str: string): boolean {
 }
 
 export default function PeaksTable(
-    { selectedElements, excitationEnergy }: PeaksTableProps,
+    { selectedElements, xRayEnergy: xRayEnergy }: PeaksTableProps,
 ) {
-    if (typeof excitationEnergy === "string") {
+    if (typeof xRayEnergy === "string") {
         return;
     }
 
@@ -24,10 +24,10 @@ export default function PeaksTable(
                 ? it.type.toUpperCase()
                 : it.type;
             const bindingEnergy = it.energyType === "KE"
-                ? excitationEnergy - it.energy
+                ? xRayEnergy - it.energy
                 : it.energy;
             const kineticEnergy = it.energyType === "BE"
-                ? excitationEnergy - it.energy
+                ? xRayEnergy - it.energy
                 : it.energy;
 
             return (

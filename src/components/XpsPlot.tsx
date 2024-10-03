@@ -3,7 +3,7 @@ import Plot from "react-plotly.js";
 import elementLibrary from "../../library.json";
 
 type XpsPlotProps = {
-    excitationEnergy: number;
+    xRayEnergy: number;
     selectedElements: string[];
 };
 
@@ -29,14 +29,14 @@ const createColorMap = (elements: string[]) => {
 };
 
 export default function XpsPlot(
-    { excitationEnergy, selectedElements }: XpsPlotProps,
+    { xRayEnergy: xRayEnergy, selectedElements }: XpsPlotProps,
 ) {
     const colorMap = createColorMap(selectedElements);
     const data: Data[] = elementLibrary
         .filter((it) => selectedElements.includes(it.element))
         .map((it) => {
             const energy = it.energyType == "BE"
-                ? excitationEnergy - it.energy
+                ? xRayEnergy - it.energy
                 : it.energy;
             return {
                 x: [energy],
@@ -60,7 +60,7 @@ export default function XpsPlot(
             b: 70,
         },
         xaxis: {
-            range: [0, excitationEnergy + 100],
+            range: [0, xRayEnergy + 100],
             title: {
                 text: "E<sub>kin</sub> [eV]",
                 font: {

@@ -7,15 +7,15 @@ import PeaksTable from "./components/PeaksTable";
 
 function App() {
     const [selectedElements, setSelectedElements] = useState<string[]>([""]);
-    const [excitationEnergy, setExcitationEnergy] = useState<number | "">(1486);
+    const [xRayEnergy, setXRayEnergy] = useState<number | "">(1486);
 
     return (
         <>
             <div style={{ display: "flex" }}>
                 <div style={{ display: "flex", flexDirection: "column" }}>
                     <EnergyInput
-                        excitationEnergy={excitationEnergy}
-                        setExcitationEnergy={setExcitationEnergy}
+                        xRayEnergy={xRayEnergy}
+                        setXRayEnergy={setXRayEnergy}
                     />
                     <ElementSelect
                         selectedElements={selectedElements}
@@ -24,13 +24,13 @@ function App() {
                 </div>
                 <XpsPlot
                     selectedElements={selectedElements}
-                    excitationEnergy={excitationEnergy || 1}
+                    xRayEnergy={xRayEnergy || 1}
                 />
             </div>
             <div style={{ display: "flex", justifyContent: "center" }}>
                 <PeaksTable
                     selectedElements={selectedElements}
-                    excitationEnergy={excitationEnergy}
+                    xRayEnergy={xRayEnergy}
                 />
             </div>
         </>
