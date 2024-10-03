@@ -8,13 +8,13 @@ export default function EnergyInput(
 ) {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const numValue = e.target.value === "" ? "" : Number(e.target.value);
-        if (numValue === "" || (numValue > 0 && numValue <= 3000)) {
+        if (numValue === "" || (numValue > 0 && numValue <= 6000)) {
             setXRayEnergy(numValue);
         }
     };
 
     return (
-        <div style={{ padding: "10px" }}>
+        <div style={{ padding: 10 }}>
             <label style={{ paddingRight: "5px" }}>X-Ray Energy [eV]</label>
             <input
                 type="number"
