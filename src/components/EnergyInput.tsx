@@ -15,7 +15,7 @@ export default function EnergyInput(
 
     return (
         <div style={{ padding: "10px" }}>
-            <label style={{ paddingRight: "5px" }}>X-Ray Energy</label>
+            <label style={{ paddingRight: "5px" }}>X-Ray Energy [eV]</label>
             <input
                 type="number"
                 value={xRayEnergy}

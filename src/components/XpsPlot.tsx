@@ -35,16 +35,19 @@ export default function XpsPlot(
     const data: Data[] = elementLibrary
         .filter((it) => selectedElements.includes(it.element))
         .map((it) => {
-            const energy = it.energyType == "BE"
+            const bindingEnergy = it.energyType === "KE"
+                ? xRayEnergy - it.energy
+                : it.energy;
+            const kineticEnergy = it.energyType === "BE"
                 ? xRayEnergy - it.energy
                 : it.energy;
             return {
-                x: [energy],
+                x: [kineticEnergy],
                 y: [1],
                 name: `${it.element} ${it.type}`,
-                hovertext: `${it.energy} eV, ${it.element} ${it.type}`,
+                hovertext: `${it.element} ${it.type}, Binding Energy = ${bindingEnergy} eV, KineticEnergy = ${kineticEnergy} eV`,
                 hoverinfo: "text",
-                text: `${it.element} ${it.type} = ${it.energy} eV`,
+                text: `${it.element} ${it.type} Binding Energy = ${bindingEnergy} eV, Kinetic Energy = ${kineticEnergy} eV`,
                 type: "bar",
                 width: 3,
                 marker: { color: colorMap[it.element], opacity: 0.5 },
